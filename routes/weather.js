@@ -42,13 +42,13 @@ function find(req, loc){
         message = "날씨는 맑아요 :)";
       break;
       case "03": case "04": case "50":
-        w = "날씨가 흐려요";
+        message = "날씨가 흐려요";
       break;
       case "09": case "10": case "11":
-        w = "는 비가 오고 있어요.";
+        message = "는 비가 오고 있어요.";
       break;
       case "13":
-        w = "는 눈이 오고 있어요!";
+        message = "는 눈이 오고 있어요.";
       break;
     }
 

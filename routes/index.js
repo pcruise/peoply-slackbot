@@ -18,7 +18,7 @@ var speaker = function(message){
   slack.webhook({
     channel: "#" + channel,
     username: "PeoplyBot",
-    text: "Hello :)"
+    text: message
   }, function(err, response) {
     console.log(response);
   });
