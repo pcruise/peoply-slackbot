@@ -35,24 +35,26 @@ function find(req, loc){
 
     var c = [body.main.temp_min - 273.15, body.main.temp_max - 273.15];
     var h = body.main.humidity;
+    console.log(body);
     var w = body.weather[0].icon;
+    console.log(w);
 
     switch(w){
       case "01": case "02":
-        message = "날씨는 맑아요 :)";
+        w = "날씨는 맑아요 :)";
       break;
       case "03": case "04": case "50":
-        message = "날씨가 흐려요";
+        w = "날씨가 흐려요";
       break;
       case "09": case "10": case "11":
-        message = "는 비가 오고 있어요.";
+        w = "는 비가 오고 있어요.";
       break;
       case "13":
-        message = "는 눈이 오고 있어요.";
+        w = "는 눈이 오고 있어요.";
       break;
     }
 
-    message = "[" + loc + "] " + message + " (최저기온: "+c[0]+"'C 최고기온 "+c[1]+"'C / 습도 "+h+"%)";
+    message = "[" + loc + "] " + w + " (최저기온: "+c[0]+"'C 최고기온 "+c[1]+"'C / 습도 "+h+"%)";
 
     req.speaker(message);
   });
