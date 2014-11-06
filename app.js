@@ -1,11 +1,3 @@
-var Slack = require('slack-node');
-var util = require("util");
-
-domain = "peoply";
-webhookToken = "tLK3w8TgCnbeLixtqXqKpqDG";
-
-slack = new Slack(webhookToken, domain);
-
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -15,6 +7,8 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+
+var util = require("util");
 
 var app = express();
 
