@@ -12,6 +12,7 @@ slack = new Slack(webhookToken, domain);
 
 var weather = require("./weather.js");
 var speaker = function(message){
+  console.log(message);
   var channel = this.body.channel_name;
 
   slack.webhook({
