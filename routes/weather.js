@@ -29,10 +29,35 @@ var weather = function(req){
 function find(req, loc){
   var lng_lat = LOC_DATA[loc];
 
-  request('http://api.openweathermap.org/data/2.5/weather?lat='+lng_lat[1]+'&lon='+lng_lat[0], function(a, b){
-    console.log(a, b);
-    req.speaker("test");
+  request('http://api.openweathermap.org/data/2.5/weather?lat='+lng_lat[1]+'&lon='+lng_lat[0], function(e, r){
+    var body = JSON.parse(r.body);
+    var message = "";
+
+    var c = [body.main.temp_min - 273.15, body.main.temp_max - 273.15];
+    var h = body.main.humidity;
+    var w = body.weather[0].icon;
+
+    switch(w){
+      case "01": case "02":
+        message = "날씨는 맑아요 :)";
+      break;
+      case "03": case "04": case "50":
+        w = "날씨가 흐려요";
+      break;
+      case "09": case "10": case "11":
+        w = "는 비가 오고 있어요.";
+      break;
+      case "13":
+        w = "는 눈이 오고 있어요!";
+      break;
+    }
+
+    message = "[" + loc + "] " + message + " (최저기온: "+c[0]+"'C 최고기온 "+c[1]+"'C / 습도 "+h+"%)";
+
+    req.speaker(message);
   });
 }
+
+find({}, "판교");
 
 module.exports = weather;
