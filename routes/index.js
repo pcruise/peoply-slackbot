@@ -24,14 +24,12 @@ var speaker = function(message){
   });
 };
 
-/* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
-});
-
 router.post('/', function(req, res){
+  console.log(req.body);
+
   if(req.body && token == "SYB244fFe6JePkdvBqHDgSzs" ){
     var command = req.body.text.replace(/\s.*/g, "");
+
 
     req.speaker = speaker;
 
@@ -42,7 +40,6 @@ router.post('/', function(req, res){
     }
     res.end();
   }
-  console.log(req.body);
 });
 
 module.exports = router;
