@@ -1,4 +1,4 @@
-var WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?lat=%27+lng_lat%5B1%5D+%27&lon=%27+lng_lat%5B0%5D"
+var request = require("request");
 var LOC_DATA = {
   // 서울지역 동일
   "서울": [126.98955,37.5651],
@@ -20,16 +20,16 @@ var LOC_DATA = {
 
 var weather = function(req){
   if(req.body.text == "!날씨"){
-    find("판교");
+    find(req, "판교");
   } else if(req.body.text.indexOf(" ") == -1) {
   } else {
   }
 };
 
-function find(loc){
+function find(req, loc){
   var lng_lat = LOC_DATA[loc];
 
-  require('http://api.openweathermap.org/data/2.5/weather?lat='+lng_lat[1]+'&lon='+lng_lat[0], function(a, b){
+  request('http://api.openweathermap.org/data/2.5/weather?lat='+lng_lat[1]+'&lon='+lng_lat[0], function(a, b){
     console.log(a, b);
     req.speaker("test");
   });
