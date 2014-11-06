@@ -1,0 +1,23 @@
+{
+  "name": "peoply-slackbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "chivebot": "^1.0.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "hapi -c config.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pcruise/peoply-slackbot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pcruise/peoply-slackbot/issues"
+  },
+  "homepage": "https://github.com/pcruise/peoply-slackbot"
+}

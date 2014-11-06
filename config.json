@@ -1,0 +1,17 @@
+{
+    "servers": [
+        {
+            "host": "0.0.0.0",
+            "port": "8000"
+        }
+    ],
+    "plugins": {
+        "chivebot-coolfaces": {},
+        "chivebot-weather": {},
+        "chivebot": {
+            "trigger_word": "PeoplyBot",
+            "user_name": "PeoplyBot",
+            "token": "42wKwuKcCBwJLd6djs8antSG"
+        }
+    }
+}
