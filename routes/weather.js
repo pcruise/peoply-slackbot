@@ -58,6 +58,4 @@ function find(req, loc){
   });
 }
 
-find({}, "판교");
-
 module.exports = weather;
