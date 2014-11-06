@@ -57,8 +57,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
-var debug = require('debug')('peoply-slackbot');
-
 app.set('port', process.env.PORT || 1337);
 
 var server = app.listen(app.get('port'), function() {

@@ -27,9 +27,8 @@ var speaker = function(message){
 router.post('/', function(req, res){
   console.log(req.body);
 
-  if(req.body && token == "SYB244fFe6JePkdvBqHDgSzs" ){
+  if(req.body && req.body.token == "SYB244fFe6JePkdvBqHDgSzs" ){
     var command = req.body.text.replace(/\s.*/g, "");
-
 
     req.speaker = speaker;
 
@@ -38,7 +37,9 @@ router.post('/', function(req, res){
         weather(req);
       break;
     }
+    console.log("good");
     res.end();
+    return;
   }
 });
 
