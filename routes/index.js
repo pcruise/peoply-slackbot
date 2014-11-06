@@ -32,12 +32,12 @@ router.post('/', function(req, res){
 
     req.speaker = speaker;
 
+    console.log(command);
     switch(command){
-      case "날씨":
+      case "!날씨":
         weather(req);
       break;
     }
-    console.log("good");
     res.end();
     return;
   }
