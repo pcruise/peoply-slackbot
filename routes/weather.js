@@ -23,6 +23,14 @@ var weather = function(req){
     find(req, "판교");
   } else if(req.body.text.indexOf(" ") == -1) {
   } else {
+    var text = req.body.text;
+    var text_token = req.body.text.split(" ");
+    for(var i=0;i<text_token.length;i++){
+      if(LOC_DATA.hasOwnProperty(text_token[i])){
+        find(req, text_token[i]);
+        break;
+      }
+    }
   }
 };
 
@@ -51,7 +59,7 @@ function find(req, loc){
       break;
     }
 
-    message = "[" + loc + "] " + w + " (최저기온: "+c[0]+"'C 최고기온 "+c[1]+"'C / 습도 "+h+"%)";
+    message = "[" + loc + "] " + w + "  (최저기온: "+c[0]+"'C 최고기온 "+c[1]+"'C / 습도 "+h+"%)";
 
     req.speaker(message);
   });
