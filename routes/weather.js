@@ -35,10 +35,7 @@ function find(req, loc){
 
     var c = [body.main.temp_min - 273.15, body.main.temp_max - 273.15];
     var h = body.main.humidity;
-    console.log(body);
-    var w = body.weather[0].icon;
-    console.log(w);
-
+    var w = body.weather[0].icon.replace(/[^0-9]/g,'');
     switch(w){
       case "01": case "02":
         w = "날씨는 맑아요 :)";
