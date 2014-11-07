@@ -12,12 +12,19 @@ var hottel = function(req){
   var date_now = new Date(Date.now() - (1000*60*60*5) );
   var t = "";
 
-  console.log(req.body);
-
-  var data = req.body.data;
+  var body = req.body;
+  var data;
 
   switch(req.command){
     case "판매 성공":
+      data = {
+        hotel_name: body["data[hotel_name]"],
+        room_name: body["data[room_name]"],
+        coin: body["data[coin]"],
+        price: body["data[price]"],
+        customer_name: body["data[customer_name]"]
+      };
+
       if(today_str != date_now.toDateString()){
         today = 0;
         today_str = date_now.toDateString();
