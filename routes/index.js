@@ -60,10 +60,11 @@ router.post('/', function(req, res){
 });
 
 router.put("/", function(req, res){
-  req.channel_name = "announcement";
+  req.body.channel_name = "announcement";
 
   if(req.body && req.body.product && req.body.action){
     var command = [req.body.product, req.body.action];
+
     req.speaker = speaker;
     req.command = command[1];
     req.put_data = req.body.data;
