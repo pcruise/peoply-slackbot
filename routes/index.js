@@ -54,9 +54,9 @@ router.post('/', function(req, res){
         weather(req);
       break;
     }
-    res.end();
-    return;
   }
+  res.end();
+  return;
 });
 
 router.put("/", function(req, res){
@@ -77,6 +77,8 @@ router.put("/", function(req, res){
       break;
     }
   }
+  res.end();
+  return;
 });
 
 module.exports = router;
