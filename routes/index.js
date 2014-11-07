@@ -62,10 +62,6 @@ router.post('/', function(req, res){
 router.put("/", function(req, res){
   req.channel_name = "announcement";
 
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,OPTIONS,DELETE');
-  res.header('Access-Control-Allow-Headers', 'origin, content-type, accept');
-
   if(req.body && req.body.product && req.body.action){
     req.speaker = speaker;
     req.command = command[1];
