@@ -11,6 +11,8 @@ webhookToken = "tLK3w8TgCnbeLixtqXqKpqDG";
 slack = new Slack(webhookToken, domain);
 
 var weather = require("./weather.js");
+var hottel = require("./hottel.js");
+
 var speaker = function(message){
   console.log(message);
   var channel = this.body.channel_name;
@@ -30,7 +32,7 @@ router.post('/', function(req, res){
 
     req.speaker = speaker;
 
-    console.log(command);
+    console.log("Chat Posted:" + command);
     switch(command){
       case "!날씨":
         weather(req);
@@ -38,6 +40,27 @@ router.post('/', function(req, res){
     }
     res.end();
     return;
+  }
+});
+
+router.put("/", function(req, res){
+  res.header('Access-Control-Allow-Origin', 'example.com');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+  if(req.body && req.body.product && req.body.action){
+    req.speaker = speaker;
+    req.command = command[1];
+    req.put_data = req.body.data;
+
+    var command = [req.body.product, req.body.action];
+    console.log("Put Posted:" + command);
+
+    switch(command[0]){
+      case "핫텔":
+        hottel(req);
+      break;
+    }
   }
 });
 
