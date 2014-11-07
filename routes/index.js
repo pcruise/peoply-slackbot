@@ -1,3 +1,19 @@
+/* Put example
+
+{
+  product: "핫텔",
+  action: "판매 성공",
+  data: {
+    hotel_name: "호텔 이름",
+    room_name: "방 이름",
+    coin: "사용한 코인",
+    price: "가격 (구매가)",
+    customer_name: "구매자 이름"
+  }
+}
+
+*/
+
 var express = require('express');
 var router = express.Router();
 var request = require("request");
@@ -46,7 +62,7 @@ router.post('/', function(req, res){
 router.put("/", function(req, res){
   req.channel_name = "announcement";
 
-  res.header('Access-Control-Allow-Origin', 'example.com');
+  res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
 
