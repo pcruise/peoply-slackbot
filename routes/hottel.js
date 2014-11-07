@@ -11,6 +11,9 @@ var hottel = function(req){
   var message = "";
   var date_now = new Date(Date.now() - (1000*60*60*5) );
   var t = "";
+
+  console.log(req.body);
+
   var data = req.body.data;
 
   switch(req.command){
