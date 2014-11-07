@@ -44,6 +44,8 @@ router.post('/', function(req, res){
 });
 
 router.put("/", function(req, res){
+  req.channel_name = "announcement";
+
   res.header('Access-Control-Allow-Origin', 'example.com');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
