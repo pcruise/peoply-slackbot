@@ -7,7 +7,7 @@ var tcomma = function(inp){
 };
 
 
-var weather = function(req){
+var hottel = function(req){
   var message = "";
   var date_now = new Date(Date.now() - (1000*60*60*5) );
   var t = "";
@@ -31,3 +31,5 @@ var weather = function(req){
   }
   req.speaker("[핫텔] " + message);
 };
+
+module.exports = hottel;
