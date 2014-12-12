@@ -5,8 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var coffee = require("coffee-script/register");
+var routes = require('./routes/index.coffee');
 
 var util = require("util");
 
@@ -31,7 +31,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/', routes);
+// app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

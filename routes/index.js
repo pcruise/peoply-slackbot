@@ -21,6 +21,9 @@ var request = require("request");
 var Slack = require('slack-node');
 var util = require("util");
 
+var redis = require("redis");
+global.client = redis.createClient();
+
 domain = "peoply";
 webhookToken = "tLK3w8TgCnbeLixtqXqKpqDG";
 
@@ -28,6 +31,7 @@ slack = new Slack(webhookToken, domain);
 
 var weather = require("./weather.js");
 var hottel = require("./hottel.js");
+var bab = require("./bab.js");
 
 var speaker = function(message){
   console.log(message);
