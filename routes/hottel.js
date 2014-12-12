@@ -4,19 +4,6 @@ var fs = require("fs");
 var today_str = "";
 var today;
 
-var db = fs.readFileSync('db.hottel.json', 'utf8');
-if(!db){
-  db = {};
-} else {
-  try {
-    db = JSON.parse(db);
-  } catch(e){
-    db = {};
-  }
-  today_str = db.today_str;
-}
-var today = db;
-
 var tcomma = function(inp){
   return (''+parseInt(inp,10)).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
@@ -39,10 +26,23 @@ var check_today = function(){
   }
 };
 
-var write_db = function(){
-  db = today;
-  fs.writeFileSync('db.hottel.json', JSON.stringify(db));
+var read_db = function(){
+  global.client.get("slackbot:hottel:db", function(e, r){
+    try {
+      today = JSON.parse(r);
+      today_str = today.today_str;
+    } catch(e){
+      today = {};
+      today_str = "";
+    }
+  });
 }
+
+var write_db = function(){
+  global.client.set("slackbot:hottel:db", JSON.stringify(today));
+}
+
+read_db();
 
 check_today();
 
