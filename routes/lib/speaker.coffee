@@ -5,18 +5,26 @@ webhookToken = "tLK3w8TgCnbeLixtqXqKpqDG";
 
 slack = new Slack(webhookToken, domain);
 
-module.exports = (message) ->
-  console.log message
+speaker = (message) ->
+  # console.log message
   if this.body?
     channel = this.body.channel_name;
   else
     channel = "announcement"
+
+  thebody = this.body
   option =
     channel: "#" + channel,
     username: "PeoplyBot",
     text: message
 
   respon = (err, response) ->
-    console.log(response);
+    if err?
+      setTimeout ()->
+        this.body = thebody
+        speaker(message)
+      , 1000
 
   slack.webhook(option, respon);
+
+module.exports = speaker
