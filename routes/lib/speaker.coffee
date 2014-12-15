@@ -7,7 +7,10 @@ slack = new Slack(webhookToken, domain);
 
 module.exports = (message) ->
   console.log message
-  channel = this.body.channel_name;
+  if this.body?
+    channel = this.body.channel_name;
+  else
+    channel = "announcement"
   option =
     channel: "#" + channel,
     username: "PeoplyBot",
