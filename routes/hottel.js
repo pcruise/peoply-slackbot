@@ -35,6 +35,8 @@ var read_db = function(){
       today = {};
       today_str = "";
     }
+    console.log("db restored.");
+    console.log(today);
   });
 }
 
@@ -76,7 +78,7 @@ var hottel = function(req){
       }
 
       message = util.format("오늘 %d번째 호텔방을 예약중이에요! (%s / %s, %s) %s [총: %s, %sC]",
-        today.hotel, data.hotel_name, data.room_name, data.customer_name, t, today.hotel_price, today.hotel_coin_used);
+        today.hotel, data.hotel_name, data.room_name, data.customer_name, t, tcomma(today.hotel_price), tcomma(today.hotel_coin_used));
 
       write_db();
     break;
