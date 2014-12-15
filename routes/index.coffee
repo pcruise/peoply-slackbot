@@ -22,6 +22,7 @@ redis = require "redis"
 global.client = redis.createClient()
 
 speaker = require "./lib/speaker.coffee"
+global.speaker = speaker
 
 weather = require "./weather.js"
 hottel = require "./hottel.js"
