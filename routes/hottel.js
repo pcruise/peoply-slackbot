@@ -12,6 +12,7 @@ var check_today = function(){
   var date_now = new Date(Date.now() - (1000*60*60*5) );
 
   if(today_str != date_now.toDateString()){
+    console.log("new day!");
     today_str = date_now.toDateString();
     today = {
       hotel: 0,
