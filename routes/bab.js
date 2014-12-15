@@ -2,7 +2,6 @@
 // 토, 일요일은 쉽니다
 // 11시 50분 - 점심, 6시 15분 - 저녁 (참가인원 받음)
 
-var client = global.client;
 var anounced = false;
 
 function loop(){
@@ -12,7 +11,7 @@ function loop(){
   m = d.getMinutes();
 
   if (h == 11 && m == 50) {
-    client.speaker("[밥] 드세요");
+    global.speaker("[밥] 드세요");
     anounced = true;
   }
 
@@ -21,7 +20,7 @@ function loop(){
   }
 
   if(h == 18 && m == 15) {
-    client.speaker("[밥] 드실분?");
+    global.speaker("[밥] 드실분?");
     anounced = true;
   }
 
