@@ -86,7 +86,7 @@ var hottel = function(req){
       today.coin_price += parseInt(data.price,10);
 
       message = util.format("오늘 %d번째 코인 결제가 성공했어요! / %s, 구매자: %s [총: %s]",
-        today.coin, data.hotel_name, data.customer_name, tcomma(today.coin_price);
+        today.coin, data.hotel_name, data.customer_name, tcomma(today.coin_price));
 
       write_db();
     break;
