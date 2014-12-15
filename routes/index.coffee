@@ -27,6 +27,7 @@ global.speaker = speaker
 weather = require "./weather.js"
 hottel = require "./hottel.js"
 bab = require "./bab.js"
+group = require "./group.coffee"
 
 TOKEN = "SYB244fFe6JePkdvBqHDgSzs"
 
@@ -39,6 +40,8 @@ post = (req, res) ->
     switch command
       when "!날씨"
         weather req
+      when "!게시"
+        group req
 
     res.end()
 
