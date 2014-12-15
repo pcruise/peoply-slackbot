@@ -76,17 +76,17 @@ var hottel = function(req){
         t = util.format("판매가: %s원", tcomma(data.price));
       }
 
-      message = util.format("오늘 %d번째 호텔방을 예약중이에요! (%s / %s, %s) %s [총: %s, %sC]",
+      message = util.format("오늘 %d번째 호텔방을 예약중이에요! (%s / %s, %s) %s [총: %s원, %sC]",
         today.hotel, data.hotel_name, data.room_name, data.customer_name, t, tcomma(today.hotel_price), tcomma(today.hotel_coin_used));
 
       write_db();
     break;
     case "코인 판매 성공":
       today.coin += 1;
-      today.coin_price += data.price;
+      today.coin_price += parseInt(data.price,10);
 
-      message = util.format("오늘 %d번째 코인 결제가 성공했어요! / %s, 구매자: %s",
-        today.coin, data.hotel_name, data.customer_name);
+      message = util.format("오늘 %d번째 코인 결제가 성공했어요! / %s, 구매자: %s [총: %s]",
+        today.coin, data.hotel_name, data.customer_name, tcomma(today.coin_price);
 
       write_db();
     break;
