@@ -22,7 +22,6 @@ var check_today = function(){
       coin_price: 0,
       today_str: today_str
     };
-
     write_db();
   }
 };
@@ -38,6 +37,7 @@ var read_db = function(){
     }
     console.log("db restored.");
     console.log(today);
+    check_today();
   });
 }
 
@@ -46,8 +46,6 @@ var write_db = function(){
 }
 
 read_db();
-
-check_today();
 
 
 var hottel = function(req){
