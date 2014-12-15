@@ -16,6 +16,15 @@ function loop(){
     anounced = true;
   }
 
+  if(h == 16) {
+    anounced = false;
+  }
+
+  if(h == 18 && m == 15) {
+    client.speaker("[밥] 드실분?");
+    anounced = true;
+  }
+
   if(h == 20) {
     anounced = false;
   }
