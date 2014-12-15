@@ -10,7 +10,7 @@ function loop(){
   h = d.getHours();
   m = d.getMinutes();
 
-  if (h == 11 && m == 50) {
+  if (h == 11 && m == 55) {
     global.speaker("[밥] 드세요");
     anounced = true;
   }
