@@ -1,6 +1,6 @@
 // 밥먹을 시간에 밥먹자고 합니다.
 // 토, 일요일은 쉽니다
-// 11시 50분 - 점심, 6시 15분 - 저녁 (참가인원 받음)
+// 11시 45분 - 점심, 5시 45분 - 저녁 (참가인원 받음)
 
 var anounced = false;
 
@@ -10,7 +10,7 @@ function loop(){
   h = d.getHours();
   m = d.getMinutes();
 
-  if (h == 11 && m == 55 && !anounced) {
+  if (h == 11 && m == 45 && !anounced) {
     global.speaker("[밥] 드세요");
     anounced = true;
   }
@@ -19,7 +19,7 @@ function loop(){
     anounced = false;
   }
 
-  if(h == 18 && m == 15 && !anounced) {
+  if(h == 17 && m == 45 && !anounced) {
     global.speaker("[밥] 드실분?");
     anounced = true;
   }
