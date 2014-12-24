@@ -78,7 +78,7 @@ var hottel = function(req){
       }
 
       message = util.format("오늘 %d번째 호텔방을 예약중이에요!\n체크인 날짜: %s\n %s / %s, %s\n%s\n[오늘 판매 합계: %s원, %sC]",
-        today.hotel, new Date(data.checkin_ts).toLocaleDateString(), data.hotel_name, data.room_name, data.customer_name, t, tcomma(today.hotel_price), tcomma(today.hotel_coin_used));
+        today.hotel, new Date(parseInt(data.checkin_ts,10)).toLocaleDateString(), data.hotel_name, data.room_name, data.customer_name, t, tcomma(today.hotel_price), tcomma(today.hotel_coin_used));
 
       write_db();
     break;
