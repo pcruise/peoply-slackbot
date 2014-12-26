@@ -77,7 +77,7 @@ var hottel = function(req){
         t = util.format("판매가: %s원", tcomma(data.price));
       }
 
-      message = util.format("(%d번째) %s / %s / %s```\n- 체크인 날짜: %s\n- %s\n- 오늘 판매 합계: %s원, %sC",
+      message = util.format("(%d번째) %s / %s / %s \n- 체크인 날짜: %s\n- %s\n- 오늘 판매 합계: %s원, %sC",
         today.hotel, data.hotel_name, data.room_name, data.customer_name, new Date(parseInt(data.checkin_ts,10)).toLocaleDateString(), t, tcomma(today.hotel_price), tcomma(today.hotel_coin_used));
 
       write_db();
@@ -86,13 +86,13 @@ var hottel = function(req){
       today.coin += 1;
       today.coin_price += parseInt(data.price,10);
 
-      message = util.format("오늘 %d번째 코인 결제가 성공했어요! / %s, 구매자: %s [총: %s]```",
+      message = util.format("오늘 %d번째 코인 결제가 성공했어요! / %s, 구매자: %s [총: %s]",
         today.coin, data.hotel_name, data.customer_name, tcomma(today.coin_price));
 
       write_db();
     break;
   }
-  req.speaker("```[핫텔] " + message);
+  req.speaker("> [핫텔] " + message);
 };
 
 module.exports = hottel;
