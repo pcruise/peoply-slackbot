@@ -19,7 +19,7 @@ todoist = (req) ->
      # Add
       console.log "add"
 
-  getProjects req, (req, r)->
+  get_projects req, (req, r)->
     projects = ""
     first = true
     for item in r
