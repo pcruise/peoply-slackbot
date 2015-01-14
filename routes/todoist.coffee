@@ -16,7 +16,15 @@ todoist = (req) ->
       console.log "add"
     else if text_token[1] == "분류추가"
       # Add
-      add_projects req, text_token.slice(2, 1000).join(" ")
+      pname = text_token.slice(2, 1000).join(" ")
+
+      if pname.length != 0
+        get_projects req, (req, r)->
+          for item in r
+            if item.name == pname
+              req.speaker "[할일] 이미 있는 분류 이름입니다."
+
+          add_projects req, pname
       return
     else if text_token[1] == "끝"
       # Add
@@ -25,6 +33,9 @@ todoist = (req) ->
      # Add
       console.log "add"
 
+    call_intro req, text_token
+
+call_intro = (req, text_token) ->
   get_projects req, (req, r)->
     projects = ""
     project_names = []
