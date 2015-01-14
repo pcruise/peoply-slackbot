@@ -17,7 +17,7 @@ todoist = (req) ->
     else if text_token[1] == "분류추가"
       # Add
       add_projects req, text_token.slice(2, 1000).join(" ")
-
+      return
     else if text_token[1] == "끝"
       # Add
       console.log "add"
@@ -44,7 +44,9 @@ todoist = (req) ->
       req.speaker "사용 방법:\n!할일 [추가|끝|삭제|분류추가|분류삭제] [분류 이름] [할일 제목]\n목록 보기: !할일 [프로젝트 이름]\n등록된 분류: #{projects}"
 
 add_projects = (req, name)->
+  console.log name
   call_api "addProject", (e, r, b) ->
+    console.log b
     req.speaker "[할일] #{name} 분류 추가되었습니다."
   , {
     name: name
