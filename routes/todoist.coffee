@@ -22,7 +22,8 @@ todoist = (req) ->
         get_projects req, (req, r)->
           for item in r
             if item.name == pname
-              req.speaker "[할일] 이미 있는 분류 이름입니다."
+              req.speaker "[할일] 이미 있는 분류 이름입니다. <#{pname}>"
+              return
 
           add_projects req, pname
       return
@@ -58,7 +59,7 @@ add_projects = (req, name)->
   console.log name
   call_api "addProject", (e, r, b) ->
     console.log b
-    req.speaker "[할일] #{name} 분류 추가되었습니다."
+    req.speaker "[할일] <#{name}> 분류 추가되었습니다."
   , {
     name: name
   }
