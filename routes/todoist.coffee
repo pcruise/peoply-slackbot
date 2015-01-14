@@ -35,6 +35,7 @@ todoist = (req) ->
 get_projects = (req, callback)->
   request "#{APIPATH}getProjects#{APITAIL}", (e, r) ->
     if !e && r
+      console.log r
       callback req, JSON.parse r
     else
       req.speaker "에러가 발생하였습니다.. #{e}"
