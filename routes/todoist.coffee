@@ -33,10 +33,10 @@ todoist = (req) ->
     req.speaker "사용 방법:\n!할일 [추가|끝|삭제] [프로젝트 이름] [할일 이름]\n!할일 [프로젝트 이름]\n등록된 프로젝트: "
 
 get_projects = (req, callback)->
-  request "#{APIPATH}getProjects#{APITAIL}", (e, r) ->
+  request "#{APIPATH}getProjects#{APITAIL}", (e, r, b) ->
     if !e && r
       console.log r
-      callback req, JSON.parse r
+      callback req, JSON.parse b
     else
       req.speaker "에러가 발생하였습니다.. #{e}"
 
