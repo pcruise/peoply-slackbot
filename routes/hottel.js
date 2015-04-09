@@ -8,6 +8,11 @@ var tcomma = function(inp){
   return (''+parseInt(inp,10)).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
+var date_format = function(ts){
+  date = new Date(ts);
+  return date.getFullYear()+'/'+(''+(date.getMonth()+101)).substr(1)+'/'+(''+(date.getDate()+100)).substr(1)+'-'+(''+(date.getHours()+100)).substr(1)+':'+(''+(date.getMinutes()+100)).substr(1);
+};
+
 var check_today = function(){
   var date_now = new Date(Date.now() - (1000*60*60*5) );
 
@@ -57,6 +62,7 @@ var hottel = function(req){
   var body = req.body;
   var data;
   data = {
+    ts: body["data[ts]"],
     checkin_ts: body["data[checkin_ts]"],
     hotel_name: body["data[hotel_name]"],
     room_name: body["data[room_name]"],
@@ -90,6 +96,9 @@ var hottel = function(req){
         today.coin, data.hotel_name, data.customer_name, tcomma(today.coin_price));
 
       write_db();
+    break;
+    case "팩스 전송 실패":
+      message = util.format("고객명: %s , 예약호텔명: %s , 결제시간: %s", data.customer_name, data.hotel_name, date_format(data.ts));
     break;
   }
   req.speaker("> [핫텔] " + message);
