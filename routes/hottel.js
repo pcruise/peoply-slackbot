@@ -9,6 +9,7 @@ var tcomma = function(inp){
 };
 
 var date_format = function(ts){
+  ts = Number(ts);
   date = new Date(ts);
   return date.getFullYear()+'/'+(''+(date.getMonth()+101)).substr(1)+'/'+(''+(date.getDate()+100)).substr(1)+'-'+(''+(date.getHours()+100)).substr(1)+':'+(''+(date.getMinutes()+100)).substr(1);
 };
@@ -98,7 +99,7 @@ var hottel = function(req){
       write_db();
     break;
     case "팩스 전송 실패":
-      message = util.format("고객명: %s , 예약호텔명: %s , 결제시간: %s", data.customer_name, data.hotel_name, date_format(data.ts));
+      message = util.format("팩스 전송 실패했어요. 고객명: %s , 예약호텔명: %s , 결제시간: %s", data.customer_name, data.hotel_name, date_format(data.ts));
     break;
   }
   req.speaker("> [핫텔] " + message);
