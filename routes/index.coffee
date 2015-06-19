@@ -59,9 +59,8 @@ put = (req, res) ->
     req.put_data = req.body.data;
 
     console.log "Put Posted:" + command
-    console.log req.body
-    # if command[1] == '판매 성공' and !req.put_data.room_cnt
-    #   post {body:{text: '!게시 '+req.put_data.hotel_name+'의 '+req.put_data.room_name+'이(가) 매진되었습니다.',channel_name:'is_soldout',token:'SYB244fFe6JePkdvBqHDgSzs'}},{end:()->}
+    if command[1] == '판매 성공' and Number(req.body['data[room_cnt]'],10) < 1
+      post {body:{text: '!게시 '+req.body['data[hotel_name]']+'의 '+req.body['data[room_name]']+'이(가) 매진되었습니다.',channel_name:'is_soldout',token:'SYB244fFe6JePkdvBqHDgSzs'}},{end:()->}
     switch command[0]
       when "핫텔"
         hottel(req);
