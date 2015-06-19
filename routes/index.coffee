@@ -32,6 +32,11 @@ todoist = require "./todoist.coffee"
 
 TOKEN = "SYB244fFe6JePkdvBqHDgSzs"
 
+ts_to_datenum = (ts)->
+  ts = Number(ts)
+  date = new Date(ts)
+  return parseInt(date.getFullYear()+(''+(date.getMonth()+101)).substr(1)+(''+(date.getDate()+100)).substr(1), 10)
+
 post = (req, res) ->
   if req.body? and req.body.token == TOKEN
     command = req.body.text.replace(/\s.*/g, "")
@@ -60,7 +65,7 @@ put = (req, res) ->
 
     console.log "Put Posted:" + command
     if command[1] == '판매 성공' and Number(req.body['data[room_cnt]'],10) < 1
-      post {body:{text: '!게시 '+req.body['data[hotel_name]']+'의 '+req.body['data[room_name]']+'이(가) 매진되었습니다.',channel_name:'is_soldout',token:'SYB244fFe6JePkdvBqHDgSzs'}},{end:()->}
+      post {body:{text: '!게시 '+ts_to_datenum(req.body['data[checkin_ts]'])+'] '+req.body['data[hotel_name]']+'의 '+req.body['data[room_name]']+'이(가) 매진되었습니다.',channel_name:'is_soldout',token:'SYB244fFe6JePkdvBqHDgSzs'}},{end:()->}
     switch command[0]
       when "핫텔"
         hottel(req);
