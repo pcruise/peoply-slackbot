@@ -69,7 +69,7 @@ var hottel = function(req){
     room_name: body["data[room_name]"],
     coin: body["data[coin]"],
     price: body["data[price]"],
-    customer_name: body["data[customer_name]"]
+    customer_name: body["data[customer_name]"],
     customer_phone: body["data[customer_phone]"]
   };
 
