@@ -70,6 +70,7 @@ var hottel = function(req){
     coin: body["data[coin]"],
     price: body["data[price]"],
     customer_name: body["data[customer_name]"]
+    customer_phone: body["data[customer_phone]"]
   };
 
   switch(req.command){
@@ -84,8 +85,8 @@ var hottel = function(req){
         t = util.format("판매가: %s원", tcomma(data.price));
       }
 
-      message = util.format("(%d번째) %s / %s / %s \n- 체크인 날짜: %s\n- %s\n- 오늘 판매 합계: %s원, %sC",
-        today.hotel, data.hotel_name, data.room_name, data.customer_name, new Date(parseInt(data.checkin_ts,10)).toLocaleDateString(), t, tcomma(today.hotel_price), tcomma(today.hotel_coin_used));
+      message = util.format("(%d번째) %s / %s / %s \n- 체크인 날짜: %s\n- %s\n- 구매자 연락처: %s\n- 오늘 판매 합계: %s원, %sC",
+        today.hotel, data.hotel_name, data.room_name, data.customer_name, new Date(parseInt(data.checkin_ts,10)).toLocaleDateString(), t, data.customer_phone, tcomma(today.hotel_price), tcomma(today.hotel_coin_used));
 
       write_db();
     break;
