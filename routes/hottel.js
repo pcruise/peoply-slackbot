@@ -69,6 +69,7 @@ var hottel = function(req){
     room_name: body["data[room_name]"],
     coin: body["data[coin]"],
     price: body["data[price]"],
+    pkey: body["data[pkey]"],
     customer_name: body["data[customer_name]"],
     customer_phone: body["data[customer_phone]"]
   };
@@ -85,8 +86,8 @@ var hottel = function(req){
         t = util.format("판매가: %s원", tcomma(data.price));
       }
 
-      message = util.format("(%d번째) %s / %s / %s \n- 체크인 날짜: %s\n- %s\n- 구매자 연락처: %s\n- 오늘 판매 합계: %s원, %sC",
-        today.hotel, data.hotel_name, data.room_name, data.customer_name, new Date(parseInt(data.checkin_ts,10)).toLocaleDateString(), t, data.customer_phone, tcomma(today.hotel_price), tcomma(today.hotel_coin_used));
+      message = util.format("(%d번째) %s / %s / %s \n- 체크인 날짜: %s\n- %s\n- 구매자 연락처: %s\n- 오늘 판매 합계: %s원, %sC\n- 팩스 수동전송: http://hottel.kr:3100/custom_fax?pkey=%s",
+        today.hotel, data.hotel_name, data.room_name, data.customer_name, new Date(parseInt(data.checkin_ts,10)).toLocaleDateString(), t, data.customer_phone, tcomma(today.hotel_price), tcomma(today.hotel_coin_used), data.pkey);
 
       write_db();
     break;
