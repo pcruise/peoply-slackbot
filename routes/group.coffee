@@ -24,7 +24,7 @@ auto_message_check = (user_key)->
     hour = date.getHours()
     if hour >= close_time and hour < open_time
       send_parse timeout_msg, user_key
-    else if r and Number(r) < ts - 3600000
+    else if !r or Number(r) < ts - 3600000
       send_parse wait_msg, user_key
     global.client.set 'hottel:concierge:last_ts:'+user_key, ts, (e,r)->
 
@@ -43,6 +43,7 @@ send_parse = (user_key, msg)->
       user_key: user_key
     )
   , (e,r,b)->
+    console.log b,'post'
     request
       url:"https://api.parse.com/1/push"
       method:'POST'
@@ -57,5 +58,6 @@ send_parse = (user_key, msg)->
           alert: "핫텔 컨시어지: "+msg
       })
     , (e,r,b)->
+      console.log b,'push'
 
 module.exports = group;
