@@ -23,9 +23,9 @@ auto_message_check = (user_key)->
     ts = date.getTime()
     hour = date.getHours()
     if hour >= close_time and hour < open_time
-      send_parse timeout_msg, user_key
+      send_parse user_key, timeout_msg
     else if !r or Number(r) < ts - 3600000
-      send_parse wait_msg, user_key
+      send_parse user_key, wait_msg
     global.client.set 'hottel:concierge:last_ts:'+user_key, ts, (e,r)->
 
 send_parse = (user_key, msg)->
