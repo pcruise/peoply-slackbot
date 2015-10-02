@@ -14,7 +14,7 @@ group = (req) ->
   console.log(req.body)
   message = "" + req.body.text.replace('!게시 ','')
   if req.body.channel_name == 'concierge_new' and req.body.user_key == 'e0d0a395c04c1a158a900dd870c38a40'
-    auto_request(req.body.user_key)
+    auto_message_check(req.body.user_key)
   req.speaker(message)
 
 auto_message_check = (user_key)->
@@ -27,6 +27,7 @@ auto_message_check = (user_key)->
     else if r and Number(r) < ts - 3600000
       send_parse wait_msg, user_key
     global.client.set 'hottel:concierge:last_ts:'+user_key, ts, (e,r)->
+
 send_parse = (user_key, msg)->
   request
     url:"https://api.parse.com/1/classes/Concierge"
