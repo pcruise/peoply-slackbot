@@ -14,18 +14,18 @@ group = (req) ->
   console.log(req.body)
   message = "" + req.body.text.replace('!게시 ','')
   if req.body.channel_name == 'concierge_new' and req.body.user_key
-    auto_message_check(req.body.user_key)
+    auto_message_check(req.body.user_key, req.body.me)
   if message
     req.speaker(message)
 
-auto_message_check = (user_key)->
+auto_message_check = (user_key, is_user)->
   global.client.get 'hottel:concierge:last_ts:'+user_key, (e,r)->
     date = new Date()
     ts = date.getTime()
     hour = date.getHours()
-    if hour >= close_time and hour < open_time
+    if hour >= close_time and hour < open_time and is_user
       send_parse user_key, timeout_msg
-    else if !r or Number(r) < ts - 3600000
+    else if (!r or Number(r) < ts - 3600000) and is_user
       send_parse user_key, wait_msg
     global.client.set 'hottel:concierge:last_ts:'+user_key, ts, (e,r)->
 
