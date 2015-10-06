@@ -15,7 +15,8 @@ group = (req) ->
   message = "" + req.body.text.replace('!게시 ','')
   if req.body.channel_name == 'concierge_new' and req.body.user_key
     auto_message_check(req.body.user_key)
-  req.speaker(message)
+  if message
+    req.speaker(message)
 
 auto_message_check = (user_key)->
   global.client.get 'hottel:concierge:last_ts:'+user_key, (e,r)->
