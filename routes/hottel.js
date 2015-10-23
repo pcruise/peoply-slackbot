@@ -22,6 +22,8 @@ var check_today = function(){
     today_str = date_now.toDateString();
     today = {
       hotel: 0,
+      hotel_repurchase: 0,
+      hotel_partners: 0,
       coin: 0,
       hotel_price: 0,
       hotel_coin_used: 0,
@@ -57,6 +59,10 @@ read_db();
 var hottel = function(req){
   var message = "";
   var t = "";
+  var percentage = 0;
+  var percentage_str = "";
+  var corp = "핫텔";
+  var new_user = 0;
 
   check_today();
 
@@ -70,6 +76,8 @@ var hottel = function(req){
     coin: body["data[coin]"],
     price: body["data[price]"],
     pkey: body["data[pkey]"],
+    repurchase: body["data[repurchase]"],
+    api_corp: body["data[api_corp]"],
     customer_name: body["data[customer_name]"],
     customer_phone: body["data[customer_phone]"]
   };
@@ -85,9 +93,19 @@ var hottel = function(req){
       } else {
         t = util.format("판매가: %s원", tcomma(data.price));
       }
-
-      message = util.format("(%d번째) %s / %s / %s \n- 체크인 날짜: %s\n- %s\n- 구매자 연락처: %s\n- 오늘 판매 합계: %s원, %sC\n- 팩스 수동전송: http://hottel.kr:3100/custom_fax?pkey=%s",
-        today.hotel, data.hotel_name, data.room_name, data.customer_name, new Date(parseInt(data.checkin_ts,10)).toLocaleDateString(), t, data.customer_phone, tcomma(today.hotel_price), tcomma(today.hotel_coin_used), data.pkey);
+      if(data.repurchase){
+        today.hotel_repurchase += 1;
+      }else if(data.api_corp){
+        today.hotel_partners += 1;
+      }
+      if(data.api_corp){
+        corp = data.api_corp;
+      }
+      new_user = today.hotel-today.hotel_repurchase-today.hotel_partners;
+      percentage = today.hotel/10000;
+      percentage_str = "첫/재/제휴구매: "+new_user+"("+(parseInt(new_user/percentage,10)/100)+") / "+today.hotel_repurchase+"("+(parseInt(today.hotel_repurchase/percentage,10)/100)+") / "+today.hotel_partners+"("+(parseInt(today.hotel_partners/percentage,10)/100)+") 건";
+      message = util.format("[%s] (%d번째) %s / %s / %s \n- %s\n- 체크인 날짜: %s\n- %s\n- 구매자 연락처: %s\n- 오늘 판매 합계: %s원, %sC\n- 팩스 수동전송: http://hottel.kr:3100/custom_fax?pkey=%s",
+        corp, today.hotel, data.hotel_name, data.room_name, data.customer_name, percentage_str, new Date(parseInt(data.checkin_ts,10)).toLocaleDateString(), t, data.customer_phone, tcomma(today.hotel_price), tcomma(today.hotel_coin_used), data.pkey);
 
       write_db();
     break;
@@ -95,16 +113,16 @@ var hottel = function(req){
       today.coin += 1;
       today.coin_price += parseInt(data.price,10);
 
-      message = util.format("오늘 %d번째 코인 결제가 성공했어요! / %s, 구매자: %s [총: %s]",
+      message = util.format("[핫텔] 오늘 %d번째 코인 결제가 성공했어요! / %s, 구매자: %s [총: %s]",
         today.coin, data.hotel_name, data.customer_name, tcomma(today.coin_price));
 
       write_db();
     break;
     case "팩스 전송 실패":
-      message = util.format("팩스 전송 실패했어요. 고객명: %s , 예약호텔명: %s , 결제시간: %s", data.customer_name, data.hotel_name, date_format(data.ts));
+      message = util.format("[핫텔] 팩스 전송 실패했어요. 고객명: %s , 예약호텔명: %s , 결제시간: %s", data.customer_name, data.hotel_name, date_format(data.ts));
     break;
   }
-  req.speaker("> [핫텔] " + message);
+  req.speaker("> " + message);
 };
 
 module.exports = hottel;
