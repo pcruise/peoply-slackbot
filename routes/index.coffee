@@ -30,7 +30,7 @@ bab = require "./bab.js"
 group = require "./group.coffee"
 todoist = require "./todoist.coffee"
 
-TOKEN = "SYB244fFe6JePkdvBqHDgSzs"
+TOKEN = global.C.token
 
 ts_to_datenum = (ts)->
   ts = Number(ts)

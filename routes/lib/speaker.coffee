@@ -1,7 +1,7 @@
 # 슬랙 채널에 글 쓰는 코드. req에 붙여서 사용
 Slack = require "slack-node"
-domain = "peoply";
-webhookToken = "tLK3w8TgCnbeLixtqXqKpqDG";
+domain = global.C.domain;
+webhookToken = global.C.webhookToken;
 
 slack = new Slack(webhookToken, domain);
 
@@ -15,7 +15,7 @@ speaker = (message) ->
   thebody = this.body
   option =
     channel: "#" + channel,
-    username: "PeoplyBot",
+    username: global.C.bot_name,
     text: message
 
   respon = (err, response) ->
