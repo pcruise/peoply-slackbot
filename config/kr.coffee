@@ -9,5 +9,4 @@ module.exports = ()->
   method.domain = "peoply"
   method.bot_name = "PeoplyBot"
 
-
   return method
