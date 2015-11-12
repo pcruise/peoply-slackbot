@@ -19,7 +19,6 @@ speaker = (message) ->
     text: message
 
   respon = (err, response) ->
-    console.log(err, response)
     if err?
       setTimeout ()->
         this.body = thebody
