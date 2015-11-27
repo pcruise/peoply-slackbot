@@ -41,14 +41,13 @@ post = (req, res) ->
   if req.body? and req.body.token == TOKEN
     command = req.body.text.replace(/\s.*/g, "")
     req.speaker = speaker
-
     # console.log "Chat Posted:" + command
     switch command
       when "!날씨"
         weather req
       when "!게시"
-        console.log req.body
-        group req
+        new_body = JSON.parse(JSON.stringify(req.body))
+        group new_body
       when "!할일"
         todoist req
 
