@@ -16,6 +16,7 @@ group = (data) ->
   if data.channel_name == 'concierge_new' and data.user_key
     auto_message_check(data.user_key, data.me)
   if message
+    console.log(message,send_channel)
     speaker(message,send_channel)
 
 auto_message_check = (user_key, is_user)->
