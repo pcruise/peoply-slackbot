@@ -25,7 +25,7 @@ speaker = (message, ch) ->
     if err?
       setTimeout ()->
         this.body = thebody
-        speaker(message)
+        speaker(message,channel)
       , 1000
 
   slack.webhook(option, respon);
