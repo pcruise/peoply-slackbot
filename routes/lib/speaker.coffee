@@ -5,12 +5,13 @@ webhookToken = global.C.webhookToken;
 
 slack = new Slack(webhookToken, domain);
 
-speaker = (message) ->
+speaker = (message, ch) ->
   # console.log message
   if this.body?
     channel = this.body.channel_name;
+  else if ch
+    channel = ch;
   else
-    console.log this
     channel = "announcement"
 
   thebody = this.body
