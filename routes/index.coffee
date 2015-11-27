@@ -47,7 +47,7 @@ post = (req, res) ->
       when "!날씨"
         weather req
       when "!게시"
-        console.log req
+        console.log req.body
         group req
       when "!할일"
         todoist req

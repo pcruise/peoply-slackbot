@@ -12,6 +12,7 @@ speaker = (message, ch) ->
   else if ch
     channel = ch;
   else
+    console.log(ch);
     channel = "announcement"
 
   thebody = this.body
