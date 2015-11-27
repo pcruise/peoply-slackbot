@@ -42,11 +42,12 @@ post = (req, res) ->
     command = req.body.text.replace(/\s.*/g, "")
     req.speaker = speaker
 
-    console.log "Chat Posted:" + command
+    # console.log "Chat Posted:" + command
     switch command
       when "!날씨"
         weather req
       when "!게시"
+        console.log req
         group req
       when "!할일"
         todoist req
