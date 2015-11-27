@@ -10,6 +10,7 @@ speaker = (message) ->
   if this.body?
     channel = this.body.channel_name;
   else
+    console.log this.body
     channel = "announcement"
 
   thebody = this.body
