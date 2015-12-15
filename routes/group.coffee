@@ -5,8 +5,6 @@ message_help = "!게시 [제목: 필수];[내용: 선택];[태그: 선택 쉼표
 app_id = global.C.parse_app_id
 app_key = global.C.parse_app_key
 
-wait_msg = '안녕하세요! 컨시어지를 찾아주셔서 감사합니다. 현재 컨시어지 마스터님과 연결중이니 잠시만 기다려주세요.'
-timeout_msg = '안녕하세요! 현재 컨시어지는 매일 08:00 ~ 02:00 에 만나실 수 있습니다. 입력하신 메시지는 컨시어지 마스터에게 전달이 되었으니 내일 오전에 다시 연락 드리겠습니다 :)'
 close_time = 2
 open_time = 8
 
@@ -25,9 +23,9 @@ auto_message_check = (user_key, is_user)->
     ts = date.getTime()
     hour = date.getHours()
     if hour >= close_time and hour < open_time and is_user
-      send_parse user_key, timeout_msg
+      send_parse user_key, global.C.auto_msg.timeout
     else if (!r or Number(r) < ts - 3600000) and is_user
-      send_parse user_key, wait_msg
+      send_parse user_key, global.C.auto_msg.wait
     global.client.set 'hottel:concierge:last_ts:'+user_key, ts, (e,r)->
 
 send_parse = (user_key, msg)->
