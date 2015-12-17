@@ -65,7 +65,7 @@ put = (req, res) ->
 
     console.log "Put Posted:" + command
     if command[1] == '판매 성공' and Number(req.body['data[room_cnt]'],10) < 1
-      post {body:{text: '!게시 '+ts_to_datenum(req.body['data[checkin_ts]'])+'] '+req.body['data[hotel_name]']+'의 '+req.body['data[room_name]']+'이(가) 매진되었습니다.',channel_name:'is_soldout',token:'SYB244fFe6JePkdvBqHDgSzs'}},{end:()->}
+      post {body:{text: '!게시 '+ts_to_datenum(req.body['data[checkin_ts]'])+'] '+req.body['data[hotel_name]']+'('+req.body['data[room_name]']+') is just sold out.',channel_name:'is_soldout',token:'4KY9DDVfTc5YKfc54KlKtgSf'}},{end:()->}
     switch command[0]
       when "핫텔"
         hottel(req);

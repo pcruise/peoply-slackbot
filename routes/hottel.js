@@ -61,8 +61,8 @@ var hottel = function(req){
   var t = "";
   var percentage = 0;
   var percentage_str = "";
-  var purchase_stat = "첫구매";
-  var corp = "핫텔";
+  var purchase_stat = "First purchase";
+  var corp = "Hottel";
   var new_user = 0;
 
   check_today();
@@ -90,25 +90,26 @@ var hottel = function(req){
 
       if(data.coin > 0){
         today.hotel_coin_used += parseInt(data.coin,10);
-        t = util.format("판매가: %s원 (코인사용 %s) ", tcomma(data.price), tcomma(data.coin));
+        t = util.format("Price: %sTHB (coin %s) ", tcomma(data.price), tcomma(data.coin));
       } else {
-        t = util.format("판매가: %s원", tcomma(data.price));
+        t = util.format("Price: %sTHB", tcomma(data.price));
       }
       if(data.repurchase){
         today.hotel_repurchase += 1;
-        purchase_stat = "재구매";
-      }else if(data.api_corp){
-        today.hotel_partners += 1;
-        purchase_stat = "제휴구매";
+        purchase_stat = "Repurchase";
       }
+      // else if(data.api_corp){
+      //   today.hotel_partners += 1;
+      //   purchase_stat = "제휴구매";
+      // }
       if(data.api_corp){
         corp = data.api_corp;
       }
       new_user = today.hotel-today.hotel_repurchase-today.hotel_partners;
       percentage = today.hotel/10000;
-      percentage_str = "- 첫구매: "+new_user+"("+(parseInt(new_user/percentage,10)/100)+"%)\n- 재구매: "+today.hotel_repurchase+"("+(parseInt(today.hotel_repurchase/percentage,10)/100)+"%)\n- 제휴구매: "+today.hotel_partners+"("+(parseInt(today.hotel_partners/percentage,10)/100)+"%)";
-      message = util.format("[%s] (%d번째) %s / %s / %s / %s \n%s\n- 체크인 날짜: %s\n- %s\n- 구매자 연락처: %s\n- 오늘 판매 합계: %s원, %sC\n- 팩스 수동전송: http://manage.hottel.kr/custom_fax?pkey=%s",
-        corp, today.hotel, data.hotel_name, data.room_name, data.customer_name, purchase_stat, percentage_str, new Date(parseInt(data.checkin_ts,10)).toLocaleDateString(), t, data.customer_phone, tcomma(today.hotel_price), tcomma(today.hotel_coin_used), data.pkey);
+      percentage_str = "- First purchase: "+new_user+"("+(parseInt(new_user/percentage,10)/100)+"%)\n- Repurchase: "+today.hotel_repurchase+"("+(parseInt(today.hotel_repurchase/percentage,10)/100)+"%)";
+      message = util.format("[%s] (%d) %s / %s / %s / %s \n%s\n- Check-in: %s\n- %s\n- Guest phone: %s\n- Today's total: %sTHB, %sC",
+        corp, today.hotel, data.hotel_name, data.room_name, data.customer_name, purchase_stat, percentage_str, new Date(parseInt(data.checkin_ts,10)).toLocaleDateString(), t, data.customer_phone, tcomma(today.hotel_price), tcomma(today.hotel_coin_used));
 
       write_db();
     break;
