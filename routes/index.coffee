@@ -26,7 +26,7 @@ global.speaker = speaker
 
 weather = require "./weather.js"
 hottel = require "./hottel.js"
-bab = require "./bab.js"
+# bab = require "./bab.js"
 group = require "./group.coffee"
 todoist = require "./todoist.coffee"
 
