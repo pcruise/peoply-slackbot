@@ -5,7 +5,7 @@ message_help = "!게시 [제목: 필수];[내용: 선택];[태그: 선택 쉼표
 app_id = global.C.parse_app_id
 app_key = global.C.parse_app_key
 
-close_time = 2
+close_time = 0
 open_time = 8
 
 group = (data) ->
