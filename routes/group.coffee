@@ -55,7 +55,7 @@ send_parse = (user_key, msg)->
       body:JSON.stringify({
         channels: ["private_"+user_key]
         data:
-          alert: "핫텔 컨시어지: "+msg
+          alert: "Hottel Concierge: "+msg
       })
     , (e,r,b)->
       console.log b,'push'
