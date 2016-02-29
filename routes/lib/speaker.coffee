@@ -23,6 +23,7 @@ speaker = (message, ch) ->
 
   respon = (err, response) ->
     if err?
+      console.log(err, response)
       setTimeout ()->
         this.body = thebody
         speaker(message,channel)
