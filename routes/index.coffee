@@ -19,7 +19,7 @@ request = require "request"
 util = require "util"
 redis = require "redis"
 
-global.client = redis.createClient()
+global.client = redis.createClient("redis://hottel.kif0kx.ng.0001.apne1.cache.amazonaws.com:6379")
 
 speaker = require "./lib/speaker.coffee"
 global.speaker = speaker
