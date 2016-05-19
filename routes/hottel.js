@@ -75,6 +75,7 @@ var hottel = function(req){
     hotel_name: body["data[hotel_name]"],
     room_name: body["data[room_name]"],
     coin: body["data[coin]"],
+    left_coin: body["data[left_coin]"],
     price: body["data[price]"],
     pkey: body["data[pkey]"],
     repurchase: body["data[repurchase]"],
@@ -82,6 +83,7 @@ var hottel = function(req){
     customer_name: body["data[customer_name]"],
     customer_phone: body["data[customer_phone]"]
   };
+  var coin_msg = "";
 
   switch(req.command){
     case "판매 성공":
@@ -103,12 +105,15 @@ var hottel = function(req){
       }
       if(data.api_corp){
         corp = data.api_corp;
+        if(data.left_coin){
+          coin_msg = "- 남은코인: "+data.left_coin;
+        }
       }
       new_user = today.hotel-today.hotel_repurchase-today.hotel_partners;
       percentage = today.hotel/10000;
       percentage_str = "- 첫구매: "+new_user+"("+(parseInt(new_user/percentage,10)/100)+"%)\n- 재구매: "+today.hotel_repurchase+"("+(parseInt(today.hotel_repurchase/percentage,10)/100)+"%)\n- 제휴구매: "+today.hotel_partners+"("+(parseInt(today.hotel_partners/percentage,10)/100)+"%)";
-      message = util.format("[%s] (%d번째) %s / %s / %s / %s \n%s\n- 체크인 날짜: %s\n- %s\n- 구매자 연락처: %s\n- 오늘 판매 합계: %s원, %sC\n- 팩스 수동전송: http://manage.hottel.kr/custom_fax?pkey=%s",
-        corp, today.hotel, data.hotel_name, data.room_name, data.customer_name, purchase_stat, percentage_str, new Date(parseInt(data.checkin_ts,10)).toLocaleDateString(), t, data.customer_phone, tcomma(today.hotel_price), tcomma(today.hotel_coin_used), data.pkey);
+      message = util.format("[%s] (%d번째) %s / %s / %s / %s \n%s\n- 체크인 날짜: %s\n- %s\n- 구매자 연락처: %s\n- 오늘 판매 합계: %s원, %sC%s\n- 팩스 수동전송: http://manage.hottel.kr/custom_fax?pkey=%s",
+        corp, today.hotel, data.hotel_name, data.room_name, data.customer_name, purchase_stat, percentage_str, new Date(parseInt(data.checkin_ts,10)).toLocaleDateString(), t, data.customer_phone, tcomma(today.hotel_price), tcomma(today.hotel_coin_used), coin_msg, data.pkey);
 
       write_db();
     break;
