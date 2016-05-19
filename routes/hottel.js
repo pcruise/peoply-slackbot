@@ -106,7 +106,7 @@ var hottel = function(req){
       if(data.api_corp){
         corp = data.api_corp;
         if(data.left_coin){
-          coin_msg = "- 남은코인: "+data.left_coin;
+          coin_msg = "\n- 남은코인: "+data.left_coin;
         }
       }
       new_user = today.hotel-today.hotel_repurchase-today.hotel_partners;
