@@ -92,7 +92,12 @@ var hottel = function(req){
     case "판매 성공":
       today.hotel += 1;
       today.hotel_price += parseInt(data.price,10);
-
+      if(today.ios == null){
+        today.ios = 0;
+      }
+      if(today.aos == null){
+        today.aos = 0;
+      }
       if(data.coin > 0){
         today.hotel_coin_used += parseInt(data.coin,10);
         t = util.format("판매가: %s원 (코인사용 %s) ", tcomma(data.price), tcomma(data.coin));
