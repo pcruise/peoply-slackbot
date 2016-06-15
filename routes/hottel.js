@@ -119,8 +119,10 @@ var hottel = function(req){
       }
       if(data.mos == 'ios'){
         today.ios++;
-      }else{
+      }else if(data.mos){
         today.aos++;
+      }else{
+        data.mos = "";
       }
       new_user = today.hotel-today.hotel_repurchase-today.hotel_partners;
       percentage = today.hotel/10000;
